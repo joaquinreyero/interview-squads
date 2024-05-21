@@ -1,0 +1,9 @@
+# .dockerignore
+
+# Ignore everything
+**
+
+# Allow files and directories
+!requirements.txt
+!src/
+!Dockerfile

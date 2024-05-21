@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+SQLAlchemy
+psycopg2-binary
+pydantic
+psycopg2-binary
+PyJWT
+passlib
+bcrypt
+python-jose
+cryptography
+jose
