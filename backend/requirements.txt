@@ -10,3 +10,7 @@ bcrypt
 python-jose
 cryptography
 jose
+requests
+openai
+langchain_community
+langchain
