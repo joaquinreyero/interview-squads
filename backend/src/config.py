@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 import logging
 import logging.config
+
 import os
+
 from src.models.models import Base
 
 
@@ -22,6 +26,8 @@ class Settings:
         self.ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
         self.TOKEN_SECRET_KEY = os.getenv("TOKEN_SECRET_KEY")
         self.TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM")
+        self.RAPID_API_KEY = os.getenv("RAPID_API_KEY")
+        self.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
     @staticmethod
     def get_database_uri() -> str:

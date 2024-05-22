@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Integer, String, Column, DateTime, Boolean, ForeignKey
+from sqlalchemy import Integer, String, Column, DateTime, Boolean, Text
 
 from datetime import datetime
 
@@ -17,18 +17,12 @@ class Test(Mixin, Base):
     __tablename__ = 'test'
     name = Column(String, nullable=False)
 
+class BlogPost(Base, Mixin):
+    __tablename__ = 'blog_post'
 
-class Users(Base, Mixin):
-    __tablename__ = "users"
-
-    email = Column(String(100), nullable=False, unique=True)
-    password = Column(String(100), nullable=False)
-
-
-class Token(Base, Mixin):
-    __tablename__ = 'token'
-
-    user_id = Column(Integer, ForeignKey('users.id'))
-
-    token = Column(String, nullable=False, unique=True)
-    expiration_date = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    link = Column(String, nullable=False)
+    title = Column(String, nullable=False)
+    topic = Column(String, nullable=False)
+    description = Column(Text, nullable=False)
+    transcription = Column(Text, nullable=False)
