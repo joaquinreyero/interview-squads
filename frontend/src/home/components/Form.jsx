@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const Form = () => {
   const [reelLink, setReelLink] = useState('');
-  const [blogPost, setBlogPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setReelLink(e.target.value);
@@ -17,8 +18,8 @@ export const Form = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/generate_blog_post`, { link: reelLink });
-      setBlogPost(response.data);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/blog/create?reel_link=${encodeURIComponent(reelLink)}`);
+      navigate(`/blog/${response.data.id}`);
     } catch (error) {
       setError('Error generating blog post');
     } finally {
@@ -49,12 +50,6 @@ export const Form = () => {
 
       {loading && <p className="mt-4 text-blue-500">Generating blog post...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
-      {blogPost && (
-        <div className="mt-6 bg-gray-100 p-4 rounded-lg">
-          <h3 className="text-xl font-bold mb-2">{blogPost.title}</h3>
-          <p>{blogPost.content}</p>
-        </div>
-      )}
     </div>
   );
 };
